@@ -1,0 +1,156 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{model/schedule/T_s}
+    {
+      \begin{axis}[
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=Time (\SI{}{\hour}),
+          ylabel=$T_s (\SI{}{\celsius})$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.95)},
+              anchor=north east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick}
+        ]
+        \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{4},col sep=comma]{model/data/BC_short.csv};
+      \end{axis}
+    }
+    \caption{steam temperature}
+    \label{fig: model/schedule/T_s}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{model/schedule/T_g}
+    {
+      \begin{axis}[
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=Time (\SI{}{\hour}),
+          ylabel=$T_g (\SI{}{\celsius})$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.95)},
+              anchor=north east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick}
+        ]
+        \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{3},col sep=comma]{model/data/BC_short.csv};
+      \end{axis}
+    }
+    \vspace{-1em}
+    \caption{gas temperature}
+    \label{fig: model/schedule/T_g}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{model/schedule/p_s}
+    {
+      \begin{axis}[
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=Time (\SI{}{\hour}),
+          ylabel=$p_s (\SI{}{\mega\pascal})$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.95)},
+              anchor=north east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick}
+        ]
+        \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{6},col sep=comma]{model/data/BC_short.csv};
+      \end{axis}
+    }
+    \caption{steam pressure}
+    \label{fig: model/schedule/p_s}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{model/schedule/p_g}
+    {
+      \begin{axis}[
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=Time (\SI{}{\hour}),
+          ylabel=$p_g (\SI{}{\mega\pascal})$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.95)},
+              anchor=north east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick}
+        ]
+        \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{5},col sep=comma]{model/data/BC_short.csv};
+      \end{axis}
+    }
+    \vspace{-1em}
+    \caption{gas pressure}
+    \label{fig: model/schedule/p_g}
+  \end{subfigure}
+  \caption{Example schedule: five full -- partial cycles followed by a shutdown.}
+  \label{fig: model/schedule}
+\end{figure}

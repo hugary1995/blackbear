@@ -1,0 +1,61 @@
+\begin{table}[htb!]
+  \centering
+  \caption{Summary of material properties and model parameters for metal}
+  \begin{tabular}{r c c c}
+    \toprule
+    Property/Parameter                 & Symbol   & Value        & Unit                                     \\
+    \midrule
+    Outer radius                       & $c$      & 25           & \SI{}{\milli\meter}                      \\
+    Thickness                          & $\tau$   & 11           & \SI{}{\milli\meter}                      \\
+    Young's modulus                    & $E$      & 190          & \SI{}{\giga\pascal}                      \\
+    Poisson's ratio                    & $\nu$    & 0.3          & nondim.                                  \\
+    Thermal conductivity               & $\kappa$ & 30           & \SI{}{\watt\per\meter\per\kelvin}        \\
+    Convection coefficient (metal-gas) & $h$      & 100          & \SI{}{\watt\per\square\meter\per\kelvin} \\
+    Creep coefficient                  & $A$      & \SI{2.3e6}{} & \SI{}{\per\second}                       \\
+    Creep exponent                     & $n$      & \SI{5.06}{}  & nondim.                                  \\
+    Creep activation energy            & $Q$      & 400          & \SI{}{\kilo\joule\per\mole}              \\
+    \bottomrule
+  \end{tabular}
+  \label{tab: metal}
+\end{table}
+
+\begin{table}[htb!]
+  \centering
+  \caption{Summary of material properties and model parameters for oxide}
+  \begin{tabular}{r c c c}
+    \toprule
+    Property/Parameter                   & Symbol        & Value           & Unit                                     \\
+    \midrule
+    Young's modulus                      & $E$           & 120             & \SI{}{\giga\pascal}                      \\
+    Poisson's ratio                      & $\nu$         & 0.24            & nondim.                                  \\
+    Thermal conductivity                 & $\kappa$      & 3               & \SI{}{\watt\per\meter\per\kelvin}        \\
+    Convection coefficient (steam-oxide) & $h$           & 2800            & \SI{}{\watt\per\square\meter\per\kelvin} \\
+    Creep coefficient                    & $A$           & \SI{8.5875e7}{} & \SI{}{\per\second}                       \\
+    Creep exponent                       & $n$           & \SI{3}{}        & nondim.                                  \\
+    Creep activation energy              & $Q$           & \SI{421.62}{}   & \SI{}{\kilo\joule\per\mole}              \\
+    Growth strain scale factor           & $B$           & 0.3             & \SI{}{\meter}                            \\
+    Oxidation coefficient                & $A_\text{ox}$ & \SI{6.22e8}{}   & \SI{}{\square\meter\per\hour}            \\
+    Oxidation activation energy          & $Q_\text{ox}$ & 326             & \SI{}{\kilo\joule\per\mole}              \\
+    \bottomrule
+  \end{tabular}
+  \label{tab: oxide}
+\end{table}
+
+\begin{table}[htb!]
+  \centering
+  \caption{Summary of operation schedule}
+  \begin{tabular}{r c c c c c c}
+    \toprule
+    Load     & Duration (\SI{}{\hour}) & $T_s$ (\SI{}{\celsius}) & $T_g$ (\SI{}{\celsius}) & $p_s$ (\SI{}{\mega\pascal}) & $p_g$ (\SI{}{\mega\pascal}) & Transition (\SI{}{\hour})        \\
+    \midrule
+    Full     & 14                      & 530                     & 1100                    & 17                          & 0.2                         & Full to Partial: 1               \\
+    Partial  & 8                       & 525                     & 845                     & 10                          & 0.1                         & Partial to Full: 1               \\
+    Shutdown & 25                      & 25                      & 25                      & 0.1                         & 0.1                         & \makecell[t]{Full to Shutdown: 6 \\ Shutdown to Full: 3}       \\
+    \bottomrule
+  \end{tabular}
+  \label{tab: oxide}
+\end{table}
+
+\input{model/figures/CTE}
+
+\input{model/figures/schedule}

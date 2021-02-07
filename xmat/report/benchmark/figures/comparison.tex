@@ -1,0 +1,197 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{benchmark/comparison/temp}
+    {
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=2]},
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=$x$ ($\SI{}{\milli\meter}$),
+          ylabel=$T$ ($\SI{}{\celsius}$),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.05)},
+              anchor=south east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick, mark size=0.5},
+          mark repeat = 10,
+          mark phase = 0
+        ]
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_temp.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_temp.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_temp_0002.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_temp_0011.csv};
+        \legend{full load -- reference, partial load -- reference, full load -- MOOSE, partial load -- MOOSE};
+      \end{axis}
+    }
+    \caption{}
+    \label{fig: benchmark/comparison/temp}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{benchmark/comparison/sigma_rr}
+    {
+      \begin{axis}[
+          unbounded coords=jump,
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=3]},
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=$x$ ($\SI{}{\milli\meter}$),
+          ylabel=$\sigma_{rr}$ ($\SI{}{\mega\pascal}$),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.05)},
+              anchor=south east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={mark size=0.5},
+          mark repeat = 6,
+          mark phase = 0
+        ]
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_sigma_rr.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_sigma_rr.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_sigma_rr.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_stress_rr_0002.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_stress_rr_0011.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_stress_rr_0021.csv};
+        \legend{full load -- reference, partial load -- reference, shut down -- reference, full load -- MOOSE, partial load -- MOOSE, shut down -- MOOSE};
+      \end{axis}
+    }
+    \caption{}
+    \label{fig: benchmark/comparison/sigma_rr}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{benchmark/comparison/sigma_tt}
+    {
+      \begin{axis}[
+          unbounded coords=jump,
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=3]},
+          width=1\textwidth,
+          height=1\textwidth,
+          ymax=50,
+          xlabel=$x$ ($\SI{}{\milli\meter}$),
+          ylabel=$\sigma_{\theta\theta}$ ($\SI{}{\mega\pascal}$),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.05)},
+              anchor=south east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={mark size=0.5},
+          mark repeat = 6,
+          mark phase = 0
+        ]
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_sigma_tt.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_sigma_tt.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_sigma_tt.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_stress_tt_0002.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_stress_tt_0011.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_stress_tt_0021.csv};
+        \legend{full load -- reference, partial load -- reference, shut down -- reference, full load -- MOOSE, partial load -- MOOSE, shut down -- MOOSE};
+      \end{axis}
+    }
+    \caption{}
+    \label{fig: benchmark/comparison/sigma_tt}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{benchmark/comparison/sigma_zz}
+    {
+      \begin{axis}[
+          unbounded coords=jump,
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=3]},
+          width=1\textwidth,
+          height=1\textwidth,
+          ymax=50,
+          xlabel=$x$ ($\SI{}{\milli\meter}$),
+          ylabel=$\sigma_{zz}$ ($\SI{}{\mega\pascal}$),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.95,0.05)},
+              anchor=south east,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={mark size=0.5},
+          mark repeat = 6,
+          mark phase = 0
+        ]
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_sigma_zz.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_sigma_zz.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_sigma_zz.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/full_load_stress_zz_0002.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_stress_zz_0011.csv};
+        \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_stress_zz_0021.csv};
+        \legend{full load -- reference, partial load -- reference, shut down -- reference, full load -- MOOSE, partial load -- MOOSE, shut down -- MOOSE};
+      \end{axis}
+    }
+    \caption{}
+    \label{fig: benchmark/comparison/sigma_zz}
+  \end{subfigure}
+  \caption{Comparison between the numerical solution from \cite{xue2020stress} and the numerical solution obtained using MOOSE for (a) temperature, (b) radial stress, (c) hoop stress and (d) axial stress at different load profiles.}
+  \label{fig: benchmark/comparison}
+\end{figure}

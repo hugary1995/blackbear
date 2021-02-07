@@ -1,0 +1,141 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{laromance/comparison/metal_creep_strain}
+    {
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=3]},
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=year,
+          ylabel=$\varepsilon_{cr}$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick, mark size=0.5}
+        ]
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_rr,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_zz,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_tt,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_rr,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_zz,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_tt,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \legend{$\varepsilon_{cr,rr}$ - power law,$\varepsilon_{cr,zz}$ - power law,$\varepsilon_{cr,\theta\theta}$ - power law,$\varepsilon_{cr,rr}$ - LAROMANCE,$\varepsilon_{cr,zz}$ - LAROMANCE,$\varepsilon_{cr,\theta\theta}$ - LAROMANCE}
+      \end{axis}
+    }
+    \caption{$\strain_{cr}$ in the metal near the oxide-metal interface}
+    \label{fig: laromance/comparison/metal_creep_strain}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{laromance/comparison/oxide_creep_strain}
+    {
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=3]},
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=year,
+          ylabel=$\varepsilon_{cr}$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick, mark size=0.5}
+        ]
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_rr,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_zz,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_tt,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_rr,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_zz,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_tt,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \legend{$\varepsilon_{cr,rr}$ - power law,$\varepsilon_{cr,zz}$ - power law,$\varepsilon_{cr,\theta\theta}$ - power law,$\varepsilon_{cr,rr}$ - LAROMANCE,$\varepsilon_{cr,zz}$ - LAROMANCE,$\varepsilon_{cr,\theta\theta}$ - LAROMANCE}
+      \end{axis}
+    }
+    \caption{$\strain_{cr}$ in the oxide at the middle of the oxide}
+    \label{fig: laromance/comparison/oxide_creep_strain}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzpicturedraft{laromance/comparison/oxide_stress}
+    {
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=3]},
+          width=1\textwidth,
+          height=1\textwidth,
+          xlabel=year,
+          ylabel=$\sigma$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.5, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick, mark size=0.5}
+        ]
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_rr,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_zz,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[dashed,mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_tt,col sep=comma]{laromance/data/elastic_thermal_creep_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_rr,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_zz,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_tt,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
+        \legend{$\sigma_{cr,rr}$ - power law,$\sigma_{cr,zz}$ - power law,$\sigma_{cr,\theta\theta}$ - power law,$\sigma_{cr,rr}$ - LAROMANCE,$\sigma_{cr,zz}$ - LAROMANCE,$\sigma_{cr,\theta\theta}$ - LAROMANCE}
+      \end{axis}
+    }
+    \caption{$\stress$ at the middle of the oxide}
+    \label{fig: laromance/comparison/oxide_stress}
+  \end{subfigure}
+  \caption{}
+  \label{fig: laromance/comparison}
+\end{figure}

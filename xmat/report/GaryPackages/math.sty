@@ -1,0 +1,63 @@
+\ProvidesPackage{GaryPackages/math}
+
+% convenient bold symbols
+\usepackage{GaryPackages/bold}
+
+% textual mathematical operators
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\dev}{dev}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\cov}{C}
+\DeclareMathOperator{\cor}{R}
+\DeclareMathOperator{\cof}{cof}
+
+% miscellaneous operators
+\newcommand{\diff}[1]{\text{ d}#1}
+\newcommand{\evalover}[1]{\left\vert_{#1}\right.}
+\newcommand{\grad}{\bs{\nabla}}
+\newcommand{\divergence}{{\grad \cdot}}
+\newcommand{\wbigcup}{\mathop{\bigcup}\displaylimits}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\macaulay}[1]{\left<#1\right>}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\exponential}[1]{\exp\left(#1\right)}
+
+% for elasticity
+\newcommand{\stress}{\boldsymbol{\sigma}}
+\newcommand{\xstress}{\widetilde{\stress}}
+\newcommand{\strain}{\boldsymbol{\varepsilon}}
+\newcommand{\xnormal}{\widetilde{\bs{n}}}
+\newcommand{\normal}{\bfn}
+\newcommand{\defgrad}{\bfF}
+
+% for fracture
+\newcommand{\crackset}{\Gamma}
+\newcommand{\Gc}{{\mathcal{G}_c}}
+\newcommand{\activeenergy}{{\left< A \right>}}
+\newcommand{\inactiveenergy}{{\left< I \right>}}
+
+% for plasticity
+\newcommand{\plasticstrain}{{\overbar{\varepsilon}^p}}
+
+% utility typography for consistency
+\newcommand{\field}[1]{\mathbb{#1}}
+\newcommand{\set}[1]{#1}
+\newcommand{\fspace}[1]{\mathcal{#1}}
+\newcommand{\body}{\set{\Omega}}
+\newcommand{\bodyboundary}{{\partial \body}}
+
+% superscripts and subscripts
+\newcommand\total{\text{total}}
+\newcommand\internal{\text{internal}}
+\newcommand\external{\text{external}}
+\newcommand\fracture{\text{fracture}}
+\newcommand\elastic{\text{elastic}}
+\newcommand\critical{\text{critical}}
+\newcommand\potential{\text{potential}}
+\newcommand\plastic{\text{plastic}}
+\newcommand\trial{\text{trial}}

@@ -1,0 +1,41 @@
+\begin{figure}[htb!]
+  \centering
+  \tikzpicturedraft{model/CTE}
+  {
+    \begin{axis}[
+        colormap/jet,
+        cycle list={[of colormap,samples of colormap=2]},
+        width=0.5\textwidth,
+        height=0.5\textwidth,
+        xlabel=Temperature (\SI{}{\celsius}),
+        ylabel=$\alpha$,
+        scaled x ticks=false,
+        yticklabel style={
+            /pgf/number format/fixed,
+            /pgf/number format/precision=2
+          },
+        xticklabel style={
+            /pgf/number format/fixed,
+            /pgf/number format/precision=2
+          },
+        legend style={
+            at={(0.95,0.95)},
+            anchor=north east,
+            nodes={scale=0.5, transform shape},
+            fill=white,
+            fill opacity=0.8,
+            draw opacity=1,
+            text opacity=1,
+            cells={align=left}
+          },
+        legend cell align={left},
+        every axis plot/.append style={thick,no marks}
+      ]
+      \addplot table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{model/data/CTE_oxide.csv};
+      \addplot table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{model/data/CTE_metal.csv};
+      \legend{oxide, metal}
+    \end{axis}
+  }
+  \caption{instantaneous thermal expansion coefficients for oxide and metal.}
+  \label{fig: model/CTE}
+\end{figure}

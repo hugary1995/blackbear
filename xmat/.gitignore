@@ -1,0 +1,5 @@
+!report/**/*.pdf
+!report/**/*.csv
+report/**/*.dpth
+report/**/*.dep
+report/**/*.md5

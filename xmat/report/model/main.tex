@@ -1,0 +1,75 @@
+\section{Model}
+\label{s: model}
+
+Consider a sector of a centered circular domain with radius $c$. The oxide-metal interface is initially located at $\norm{\bfx}=b$, and the steam-oxide interface is initially located at $\norm{\bfx}=a$.
+
+Two levelset functions are used to define the interfaces:
+\begin{align}
+  \phi_\text{so}(\bfx) & = \norm{\bfx}-a, \\
+  \phi_\text{om}(\bfx) & = \norm{\bfx}-b.
+\end{align}
+
+Interfaces and boundaries are defined as
+\begin{align}
+  \Gamma_\text{so}     & = \left\{ \bfx \mid \phi_\text{so}(\bfx) = 0 \right\}, \\
+  \Gamma_\text{om}     & = \left\{ \bfx \mid \phi_\text{om}(\bfx) = 0 \right\}, \\
+  \Gamma_\text{mg}     & = \left\{ \bfx \mid \norm{\bfx} = c \right\},          \\
+  \Gamma_\text{bottom} & = \left\{ \bfx \mid x_2 = 0 \right\},                  \\
+  \Gamma_\text{left}   & = \left\{ \bfx \mid x_1 = 0 \right\},
+\end{align}
+
+Domains are partitioned as
+\begin{align}
+  \Omega          & = \Omega_\text{s} \cup \Omega_\text{o} \cup \Omega_\text{m},                     \\
+  \Omega_\text{s} & = \left\{ \bfx \mid \phi_\text{so}(\bfx) < 0, \phi_\text{om}(\bfx) < 0 \right\}, \\
+  \Omega_\text{o} & = \left\{ \bfx \mid \phi_\text{so}(\bfx) > 0, \phi_\text{om}(\bfx) < 0 \right\}, \\
+  \Omega_\text{m} & = \left\{ \bfx \mid \phi_\text{so}(\bfx) > 0, \phi_\text{om}(\bfx) > 0 \right\}.
+\end{align}
+
+Deformation is described by displacements $\bfu$, and heat conduction is described by temperature $T$, governed by
+\begin{align}
+  \divergence \stress = \bs{0},                           & \quad \forall \bfx \in \Omega_\text{o} \cup \Omega_\text{m}, \\
+  \int_\Omega \normal \cdot \strain \normal \diff{V} = 0, & \quad \forall \bfx \in \Omega_\text{o} \cup \Omega_\text{m}, \\
+  \divergence \kappa \grad T = 0,                         & \quad \forall \bfx \in \Omega_\text{o} \cup \Omega_\text{m}.
+\end{align}
+where $\normal$ is the surface (boundary) normal, $\kappa$ is the thermal conductivity, and $\stress$ is the stress with constitutive relation to be defined, subject to constraints
+\begin{align}
+  \stress \normal = -p \normal,                   & \quad \forall \bfx \in \Gamma_\text{so} \cup \Gamma_\text{mg},       \\
+  \kappa \grad T \cdot \normal = -h (T-T_\infty), & \quad \forall \bfx \in \Gamma_\text{so} \cup \Gamma_\text{mg},       \\
+  \bfu \cdot \normal = 0,                         & \quad \forall \bfx \in \Gamma_\text{bottom} \cup \Gamma_\text{left}, \\
+  [\![ \bfu ]\!] = \bs{0},                        & \quad \forall \bfx \in \Gamma_\text{om},                             \\
+  [\![ T ]\!] = 0,                                & \quad \forall \bfx \in \Gamma_\text{om}.
+\end{align}
+where $h$ is the heat convection coefficient, $p$ is the pressure, and $T_\infty$ is the environment temperature.
+
+$\stress$ is defined as
+\begin{align}
+  \stress = \mathbb{C} : \strain_\text{el},
+\end{align}
+where $\mathbb{C}$ is the elasticity tensor. The total strain is updated based on an incremental scheme with polar decomposition \cite{rashid1993incremental}, and is additively decomposed into
+\begin{align}
+  \strain_\text{total} = \strain_\text{el} + \strain_\text{th} + \strain_\text{cr} + \strain_\text{ox},
+\end{align}
+where $\strain_\text{th}$ is the thermal eigenstrain, $\strain_\text{cr}$ is the effective creep strain, and $\strain_\text{ox}$ is the accumulated strain due to oxidation.
+
+The thermal eigenstrain is defined as
+\begin{align}
+  \strain_\text{th} = \int\limits_{T_1}^{T_2} \alpha \diff{T},
+\end{align}
+where $\alpha$ is the instantaneous thermal expansion coefficient.
+
+The creep strain follows a temperature dependent power law:
+\begin{align}
+  \dot{\strain}_\text{cr} = A(\sigma_\text{vm})^n \exp\left( -\dfrac{Q}{RT} \right),
+\end{align}
+where $A$ is the creep rate coefficient, $\sigma_\text{vm}$ is the Von Mises stress, $Q$ is the creep activation energy, $R$ is the ideal gas constant.
+
+Following \cite{xue2020stress}, the oxide growth strain is decomposed into intrinsic growth strain and geometric growth strain:
+\begin{align}
+  \strain_\text{ox} & = \strain_\text{ox}^\text{intr} + \strain_\text{ox}^\text{geo}.
+\end{align}
+
+The intrinsic growth strain is given as $\strain_{\text{ox}, \theta}^\text{intr} = \strain_{\text{ox}, z}^\text{intr} = \tau/B$, $\strain_{\text{ox}, r}^\text{intr} = 0$, where $\tau = \sqrt{2A_\text{ox}\exp(-\dfrac{Q_\text{ox}}{RT})t}$ is the oxide thickness.
+The geometric growth strain is given as $\strain_{\text{ox}, r}^\text{geo} = \strain_{\text{ox}, z}^\text{geo} = 0$, $\strain_{\text{ox}, \theta}^\text{geo} = -\ln(r_c/r_0)$, where $r_c$ is the current radial coordinate and $r_0$ is the initial radial coordinate where the oxide is formed.
+
+All model parameters and material properties are summarized in the appendix.

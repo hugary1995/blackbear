@@ -1,0 +1,50 @@
+\ProvidesPackage{GaryPackages/utils}
+
+% mark something as DONE or TODO
+\newcommand\Done{\textcolor{ForestGreen}{\textbf{ [DONE] }}}
+\newcommand\ToDo{\textcolor{Red}{\textbf{ [TODO] }}}
+
+% my preferred alternative environment
+\theoremstyle{definition}
+\newtheorem*{mdalternative}{Alternative}
+\definecolor{alternativegray}{gray}{0.98}
+\newenvironment{alternative}%
+{\begin{mdframed}[backgroundcolor=alternativegray]\begin{mdalternative}}
+      {\end{mdalternative}\end{mdframed}}
+
+% my preferred example environment
+\theoremstyle{definition}
+\newtheorem*{mdexample}{Example}
+\definecolor{examplegray}{gray}{0.98}
+\newenvironment{example}%
+{\begin{mdframed}[backgroundcolor=examplegray]\begin{mdexample}}
+      {\end{mdexample}\end{mdframed}}
+
+% my preferred remark environment
+\theoremstyle{definition}
+\newtheorem*{mdremark}{Remark}
+\definecolor{remarkgray}{gray}{0.95}
+\newenvironment{remark}%
+{\begin{mdframed}[backgroundcolor=remarkgray]\begin{mdremark}}
+      {\end{mdremark}\end{mdframed}}
+
+% package for review
+\usepackage{easyReview}
+\renewcommand{\alertColor}{\textcolor{red}}
+\renewcommand{\removeColor}{\textcolor{Gray}}
+\renewcommand{\addColor}{\textcolor{RoyalBlue}}
+\renewcommand{\remove}[1]{\ifistoreview\removeColor{\st{#1}}\else #1\fi}
+\setuptodonotes{backgroundcolor=blue!10!white,bordercolor=blue!10!white,size=\small,inline}
+\renewcommand{\comment}[2]{\highlight{#1}\todo{#2}}
+\newcommand{\commentitem}[2]{\hrule\vspace{0.4em}\textbf{#1}: #2\vspace{0.4em}\hrule}
+
+% profile compile time
+\usepackage{atbegshi}
+\newcommand\showtimer{%
+  \message{^^Jtimer: \the\numexpr\the\pdfelapsedtime*1000/65536\relax}%
+  \pdfresettimer}
+\AtBeginDocument{\showtimer}
+\AtBeginShipout {\showtimer}
+
+% words not to capitalize
+\addlcwords{the a an and but or for nor with}
