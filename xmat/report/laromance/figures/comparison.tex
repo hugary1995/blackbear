@@ -2,8 +2,8 @@
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{laromance/comparison/metal_creep_strain}
-    {
+    \tikzsetnextfilenamesafe{laromance/comparison/metal_creep_strain}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=3]},
@@ -41,14 +41,14 @@
         \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_tt,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
         \legend{$\varepsilon_{cr,rr}$ - power law,$\varepsilon_{cr,zz}$ - power law,$\varepsilon_{cr,\theta\theta}$ - power law,$\varepsilon_{cr,rr}$ - LAROMANCE,$\varepsilon_{cr,zz}$ - LAROMANCE,$\varepsilon_{cr,\theta\theta}$ - LAROMANCE}
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{$\strain_{cr}$ in the metal near the oxide-metal interface}
     \label{fig: laromance/comparison/metal_creep_strain}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{laromance/comparison/oxide_creep_strain}
-    {
+    \tikzsetnextfilenamesafe{laromance/comparison/oxide_creep_strain}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=3]},
@@ -86,15 +86,15 @@
         \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_tt,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
         \legend{$\varepsilon_{cr,rr}$ - power law,$\varepsilon_{cr,zz}$ - power law,$\varepsilon_{cr,\theta\theta}$ - power law,$\varepsilon_{cr,rr}$ - LAROMANCE,$\varepsilon_{cr,zz}$ - LAROMANCE,$\varepsilon_{cr,\theta\theta}$ - LAROMANCE}
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{$\strain_{cr}$ in the oxide at the middle of the oxide}
     \label{fig: laromance/comparison/oxide_creep_strain}
   \end{subfigure}
 
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{laromance/comparison/oxide_stress}
-    {
+    \tikzsetnextfilenamesafe{laromance/comparison/oxide_stress}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=3]},
@@ -132,7 +132,7 @@
         \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_tt,col sep=comma]{laromance/data/elastic_thermal_laromance_fs.csv};
         \legend{$\sigma_{cr,rr}$ - power law,$\sigma_{cr,zz}$ - power law,$\sigma_{cr,\theta\theta}$ - power law,$\sigma_{cr,rr}$ - LAROMANCE,$\sigma_{cr,zz}$ - LAROMANCE,$\sigma_{cr,\theta\theta}$ - LAROMANCE}
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{$\stress$ at the middle of the oxide}
     \label{fig: laromance/comparison/oxide_stress}
   \end{subfigure}

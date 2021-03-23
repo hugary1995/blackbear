@@ -1,0 +1,27 @@
+% mark something as DONE or TODO
+\newcommand\Done{\textcolor{ForestGreen}{\textbf{ [DONE] }}}
+\newcommand\ToDo{\textcolor{Red}{\textbf{ [TODO] }}}
+
+% my preferred alternative environment
+\theoremstyle{definition}
+\newtheorem*{mdalternative}{Alternative}
+\definecolor{alternativegray}{gray}{0.98}
+\newenvironment{alternative}%
+{\begin{mdframed}[backgroundcolor=alternativegray,nobreak=true]\begin{mdalternative}}
+      {\end{mdalternative}\end{mdframed}}
+
+% my preferred example environment
+\theoremstyle{definition}
+\newtheorem*{mdexample}{Example}
+\definecolor{examplegray}{gray}{0.98}
+\newenvironment{example}%
+{\begin{mdframed}[backgroundcolor=examplegray,nobreak=true]\begin{mdexample}}
+      {\end{mdexample}\end{mdframed}}
+
+% my preferred remark environment
+\theoremstyle{definition}
+\newtheorem*{mdremark}{Remark}
+\definecolor{remarkgray}{gray}{0.95}
+\newenvironment{remark}%
+{\begin{mdframed}[backgroundcolor=remarkgray,nobreak=true]\begin{mdremark}}
+      {\end{mdremark}\end{mdframed}}

@@ -2,8 +2,8 @@
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{creep/comparison/metal_creep_strain}
-    {
+    \tikzsetnextfilenamesafe{creep/comparison/metal_creep_strain}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=3]},
@@ -41,14 +41,14 @@
         \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=metal_creep_strain_tt,col sep=comma]{creep/data/elastic_thermal_creep_fs.csv};
         \legend{$\varepsilon_{cr,rr}$ - reference,$\varepsilon_{cr,zz}$ - reference,$\varepsilon_{cr,\theta\theta}$ - reference,$\varepsilon_{cr,rr}$ - MOOSE,$\varepsilon_{cr,zz}$ - MOOSE,$\varepsilon_{cr,\theta\theta}$ - MOOSE}
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{$\strain_{cr}$ in the metal near the oxide-metal interface}
     \label{fig: creep/comparison/metal_creep_strain}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{creep/comparison/oxide_creep_strain}
-    {
+    \tikzsetnextfilenamesafe{creep/comparison/oxide_creep_strain}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=3]},
@@ -86,15 +86,15 @@
         \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_creep_strain_tt,col sep=comma]{creep/data/elastic_thermal_creep_fs.csv};
         \legend{$\varepsilon_{cr,rr}$ - reference,$\varepsilon_{cr,zz}$ - reference,$\varepsilon_{cr,\theta\theta}$ - reference,$\varepsilon_{cr,rr}$ - MOOSE,$\varepsilon_{cr,zz}$ - MOOSE,$\varepsilon_{cr,\theta\theta}$ - MOOSE}
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{$\strain_{cr}$ in the oxide at the middle of the oxide}
     \label{fig: creep/comparison/oxide_creep_strain}
   \end{subfigure}
 
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{creep/comparison/oxide_stress}
-    {
+    \tikzsetnextfilenamesafe{creep/comparison/oxide_stress}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=3]},
@@ -132,7 +132,7 @@
         \addplot +[mark=none,mark repeat=100,mark phase=0] table[x=years, y=oxide_stress_tt,col sep=comma]{creep/data/elastic_thermal_creep_fs.csv};
         \legend{$\sigma_{cr,rr}$ - reference,$\sigma_{cr,zz}$ - reference,$\sigma_{cr,\theta\theta}$ - reference,$\sigma_{cr,rr}$ - MOOSE,$\sigma_{cr,zz}$ - MOOSE,$\sigma_{cr,\theta\theta}$ - MOOSE}
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{$\stress$ at the middle of the oxide}
     \label{fig: creep/comparison/oxide_stress}
   \end{subfigure}

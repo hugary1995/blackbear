@@ -1,0 +1,28 @@
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+% additional color cycle list
+\usepgfplotslibrary{colorbrewer}
+\usepgfplotslibrary{colormaps}
+\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{patterns}
+
+% style to select only points from #1 to #2 (inclusive)
+\pgfplotsset{select coords between index/.style 2 args={
+      x filter/.code={
+          \ifnum\coordindex<#1\def\pgfmathresult{}\fi
+          \ifnum\coordindex>#2\def\pgfmathresult{}\fi
+        }
+    }}
+
+\usepackage{tikz}
+
+% externalize tikz to avoid unnecessary recompilation of complicated figures
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
+
+\newcommand{\tikzsetnextfilenamesafe}[1]{
+  \StrSubstitute{#1}{/}{-}[\temp]
+  \tikzsetnextfilename{\temp}
+}

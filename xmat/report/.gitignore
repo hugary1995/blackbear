@@ -1,0 +1,13 @@
+**/*.dep
+**/*.dpth
+**/*.md5
+**/*.spl
+**/*.log
+**/*.aux
+**/*.auxlock
+**/*.bbl
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.out
+**/*.synctex.gz

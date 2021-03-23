@@ -2,8 +2,8 @@
   \centering
   \begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \tikzpicturedraft{analytical/comparison/sigma_rr}
-    {
+    \tikzsetnextfilenamesafe{analytical/comparison/sigma_rr}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=2]},
@@ -37,14 +37,14 @@
         \addplot table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{analytical/data/stress_rr_0021.csv};
         \legend{reference, MOOSE};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: analytical/comparison/sigma_rr}
   \end{subfigure}
   \begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \tikzpicturedraft{analytical/comparison/sigma_tt}
-    {
+    \tikzsetnextfilenamesafe{analytical/comparison/sigma_tt}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=2]},
@@ -66,14 +66,14 @@
         \addplot table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{analytical/data/youhai_sigma_tt.csv};
         \addplot table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{analytical/data/stress_tt_0021.csv};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: analytical/comparison/sigma_tt}
   \end{subfigure}
   \begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \tikzpicturedraft{analytical/comparison/sigma_zz}
-    {
+    \tikzsetnextfilenamesafe{analytical/comparison/sigma_zz}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=2]},
@@ -95,7 +95,7 @@
         \addplot table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{analytical/data/youhai_sigma_zz.csv};
         \addplot table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{analytical/data/stress_zz_0021.csv};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: analytical/comparison/sigma_zz}
   \end{subfigure}

@@ -2,8 +2,8 @@
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{model/schedule/T_s}
-    {
+    \tikzsetnextfilenamesafe{model/schedule/T_s}
+    \begin{tikzpicture}
       \begin{axis}[
           width=1\textwidth,
           height=1\textwidth,
@@ -33,14 +33,14 @@
         ]
         \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{4},col sep=comma]{model/data/BC_short.csv};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{steam temperature}
     \label{fig: model/schedule/T_s}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{model/schedule/T_g}
-    {
+    \tikzsetnextfilenamesafe{model/schedule/T_g}
+    \begin{tikzpicture}
       \begin{axis}[
           width=1\textwidth,
           height=1\textwidth,
@@ -70,7 +70,7 @@
         ]
         \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{3},col sep=comma]{model/data/BC_short.csv};
       \end{axis}
-    }
+    \end{tikzpicture}
     \vspace{-1em}
     \caption{gas temperature}
     \label{fig: model/schedule/T_g}
@@ -78,8 +78,8 @@
 
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{model/schedule/p_s}
-    {
+    \tikzsetnextfilenamesafe{model/schedule/p_s}
+    \begin{tikzpicture}
       \begin{axis}[
           width=1\textwidth,
           height=1\textwidth,
@@ -109,14 +109,14 @@
         ]
         \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{6},col sep=comma]{model/data/BC_short.csv};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{steam pressure}
     \label{fig: model/schedule/p_s}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{model/schedule/p_g}
-    {
+    \tikzsetnextfilenamesafe{model/schedule/p_g}
+    \begin{tikzpicture}
       \begin{axis}[
           width=1\textwidth,
           height=1\textwidth,
@@ -146,7 +146,7 @@
         ]
         \addplot [black] table[x expr=\thisrowno{0}/3600,y expr=\thisrowno{5},col sep=comma]{model/data/BC_short.csv};
       \end{axis}
-    }
+    \end{tikzpicture}
     \vspace{-1em}
     \caption{gas pressure}
     \label{fig: model/schedule/p_g}

@@ -1,7 +1,7 @@
 \begin{figure}[htb!]
   \centering
-  \tikzpicturedraft{model/CTE}
-  {
+  \tikzsetnextfilenamesafe{model/CTE}
+  \begin{tikzpicture}
     \begin{axis}[
         colormap/jet,
         cycle list={[of colormap,samples of colormap=2]},
@@ -35,7 +35,7 @@
       \addplot table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{model/data/CTE_metal.csv};
       \legend{oxide, metal}
     \end{axis}
-  }
+  \end{tikzpicture}
   \caption{instantaneous thermal expansion coefficients for oxide and metal.}
   \label{fig: model/CTE}
 \end{figure}

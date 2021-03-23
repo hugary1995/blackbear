@@ -2,8 +2,8 @@
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{benchmark/comparison/temp}
-    {
+    \tikzsetnextfilenamesafe{benchmark/comparison/temp}
+    \begin{tikzpicture}
       \begin{axis}[
           colormap/jet,
           cycle list={[of colormap,samples of colormap=2]},
@@ -41,14 +41,14 @@
         \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/partial_load_temp_0011.csv};
         \legend{full load -- reference, partial load -- reference, full load -- MOOSE, partial load -- MOOSE};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: benchmark/comparison/temp}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{benchmark/comparison/sigma_rr}
-    {
+    \tikzsetnextfilenamesafe{benchmark/comparison/sigma_rr}
+    \begin{tikzpicture}
       \begin{axis}[
           unbounded coords=jump,
           colormap/jet,
@@ -89,15 +89,15 @@
         \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_stress_rr_0021.csv};
         \legend{full load -- reference, partial load -- reference, shut down -- reference, full load -- MOOSE, partial load -- MOOSE, shut down -- MOOSE};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: benchmark/comparison/sigma_rr}
   \end{subfigure}
 
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{benchmark/comparison/sigma_tt}
-    {
+    \tikzsetnextfilenamesafe{benchmark/comparison/sigma_tt}
+    \begin{tikzpicture}
       \begin{axis}[
           unbounded coords=jump,
           colormap/jet,
@@ -139,14 +139,14 @@
         \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_stress_tt_0021.csv};
         \legend{full load -- reference, partial load -- reference, shut down -- reference, full load -- MOOSE, partial load -- MOOSE, shut down -- MOOSE};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: benchmark/comparison/sigma_tt}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \tikzpicturedraft{benchmark/comparison/sigma_zz}
-    {
+    \tikzsetnextfilenamesafe{benchmark/comparison/sigma_zz}
+    \begin{tikzpicture}
       \begin{axis}[
           unbounded coords=jump,
           colormap/jet,
@@ -188,7 +188,7 @@
         \addplot +[mark=square*] table[x expr=\thisrowno{2},y expr=\thisrowno{1},col sep=comma]{benchmark/data/shut_down_stress_zz_0021.csv};
         \legend{full load -- reference, partial load -- reference, shut down -- reference, full load -- MOOSE, partial load -- MOOSE, shut down -- MOOSE};
       \end{axis}
-    }
+    \end{tikzpicture}
     \caption{}
     \label{fig: benchmark/comparison/sigma_zz}
   \end{subfigure}
