@@ -2,13 +2,16 @@
 a = 13.8
 b = 14
 c = 25
-eps = 0.03
+eps = 0.051
 b_eps = '${fparse b+eps}'
 
 # oxide parameters
 E_oxide = 1.2e5
 nu_oxide = 0.24
 kappa_oxide = 3
+Gc = 0.1
+l = 0.25
+psic = 0.05
 
 # metal parameters
 E_metal = 1.9e5
@@ -46,14 +49,15 @@ h_steam = 2.8
 []
 
 [Mesh]
+  use_displaced_mesh = false
   [refined]
     type = AnnularMeshGenerator
     dmin = 0
     dmax = 90
     rmin = ${a}
     rmax = ${b_eps}
-    nr = 5
-    nt = 80
+    nr = 4
+    nt = 100
   []
   [coarse]
     type = AnnularMeshGenerator
@@ -61,8 +65,8 @@ h_steam = 2.8
     dmax = 90
     rmin = ${b_eps}
     rmax = ${c}
-    nr = 40
-    nt = 80
+    nr = 20
+    nt = 100
   []
   [stitch]
     type = StitchedMeshGenerator
@@ -139,6 +143,8 @@ h_steam = 2.8
     order = FIRST
     family = SCALAR
   []
+  [c]
+  []
 []
 
 [AuxVariables]
@@ -147,6 +153,16 @@ h_steam = 2.8
   [ref_temp]
   []
   [temp_in_K]
+  []
+  [bounds_dummy]
+  []
+  [max_principal_strain]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [max_principal_stress]
+    order = CONSTANT
+    family = MONOMIAL
   []
   [stress_xx]
     order = CONSTANT
@@ -174,9 +190,26 @@ h_steam = 2.8
   []
 []
 
+[Bounds]
+  [irreversibility]
+    type = VariableOldValueBoundsAux
+    variable = bounds_dummy
+    bounded_variable = c
+    bound_type = lower
+  []
+  [upper_bound]
+    type = ConstantBoundsAux
+    variable = bounds_dummy
+    bounded_variable = c
+    bound_value = 1
+    bound_type = upper
+  []
+[]
+
 [XFEM]
   qrule = volfrac
   output_cut_plane = true
+  minimum_weight_multiplier = 1e-3
 []
 
 [UserObjects]
@@ -202,8 +235,23 @@ h_steam = 2.8
   [interface]
     type = FunctionAux
     variable = interface
-    function = 'r:=sqrt(x^2+y^2); r-${b}'
+    function = 'r:=sqrt(x^2+y^2); r-${a}-${eps}-1.468e-5*sqrt(t)'
+    # function = 'r:=sqrt(x^2+y^2); r-${b}'
     execute_on = 'INITIAL LINEAR TIMESTEP_END'
+  []
+  [max_principal_strain]
+    type = RankTwoScalarAux
+    variable = 'max_principal_strain'
+    rank_two_tensor = elastic_strain
+    scalar_type = MaxPrincipal
+    execute_on = 'TIMESTEP_END'
+  []
+  [max_principal_stress]
+    type = RankTwoScalarAux
+    variable = 'max_principal_stress'
+    rank_two_tensor = stress
+    scalar_type = MaxPrincipal
+    execute_on = 'TIMESTEP_END'
   []
   [stress_xx]
     type = RankTwoAux
@@ -308,6 +356,29 @@ h_steam = 2.8
     type = HeatConduction
     variable = 'temp'
   []
+  [ACBulk]
+    type = AllenCahn
+    variable = c
+    f_name = F
+  []
+  [ACInterface]
+    type = ACInterface
+    variable = c
+    kappa_name = kappa
+    mob_name = L
+  []
+  [solid_x_offdiag]
+    type = PhaseFieldFractureMechanicsOffDiag
+    variable = disp_x
+    c = c
+    component = 0
+  []
+  [solid_y_offdiag]
+    type = PhaseFieldFractureMechanicsOffDiag
+    variable = disp_y
+    c = c
+    component = 1
+  []
 []
 
 [Constraints]
@@ -383,6 +454,83 @@ h_steam = 2.8
     prop_values = 'T_gas T_steam'
     constant_on = SUBDOMAIN
   []
+  # fracture
+  [fracture_oxide]
+    type = GenericConstantMaterial
+    prop_names = 'Gc l c0'
+    prop_values = '${Gc} ${l} 3.141593'
+    block = 0
+  []
+  [fracture_metal]
+    type = GenericConstantMaterial
+    prop_names = 'Gc l c0'
+    prop_values = '1e3 ${l} 3.141593'
+    block = 1
+  []
+  [mobility]
+    type = ParsedMaterial
+    f_name = L
+    material_property_names = 'Gc'
+    function = '1/Gc'
+    constant_on = SUBDOMAIN
+  []
+  [interface_coef]
+    type = ParsedMaterial
+    f_name = kappa
+    material_property_names = 'Gc l c0'
+    function = '2*Gc*l/c0'
+    constant_on = SUBDOMAIN
+  []
+  [degradation]
+    type = DerivativeParsedMaterial
+    f_name = g
+    args = 'c'
+    function = '(1-c)^2*(1-eta)+eta'
+    constant_names = 'eta'
+    constant_expressions = '1e-6'
+    derivative_order = 2
+  []
+  [crack_geometric_function]
+    type = DerivativeParsedMaterial
+    f_name = w
+    args = 'c'
+    material_property_names = 'Gc l c0'
+    function = 'c^2*Gc/c0/l'
+    derivative_order = 2
+  []
+  # [degradation]
+  #   type = DerivativeParsedMaterial
+  #   f_name = g
+  #   args = 'c'
+  #   function = '(1-c)^p/((1-c)^p+(Gc/psic*xi/c0/l)*c*(1+a2*c+a2*a3*c^2))*(1-eta)+eta'
+  #   constant_names = 'psic p xi a2 a3 eta'
+  #   constant_expressions = '${psic} 2 2 -0.5 0 1e-6'
+  #   material_property_names = 'Gc c0 l'
+  #   derivative_order = 2
+  # []
+  # [crack_geometric_function]
+  #   type = DerivativeParsedMaterial
+  #   f_name = w
+  #   args = 'c'
+  #   material_property_names = 'Gc l c0'
+  #   function = '(2*c-c^2)*Gc/c0/l'
+  #   derivative_order = 2
+  # []
+  [free_energy]
+    type = DerivativeParsedMaterial
+    f_name = F
+    args = 'c'
+    material_property_names = 'w(c) E_el(c)'
+    function = 'w+E_el'
+    derivative_order = 2
+  []
+  [pff]
+    type = PhaseFieldFractureStrainSpectralSplit
+    c = c
+    degradation_function = g
+    elastic_energy = E_el
+    use_old_elastic_energy = true
+  []
   # oxide
   [thermal_oxide]
     type = GenericConstantMaterial
@@ -405,7 +553,7 @@ h_steam = 2.8
     block = 0
   []
   [strain_oxide]
-    type = ComputePlaneFiniteStrain
+    type = ComputePlaneIncrementalStrain
     scalar_out_of_plane_strain = scalar_strain_zz
     eigenstrain_names = 'thermal_eigenstrain'
     block = 0
@@ -422,6 +570,7 @@ h_steam = 2.8
   [stress_oxide]
     type = ComputeMultipleInelasticStress
     inelastic_models = 'creep_oxide'
+    damage_model = 'pff'
     block = 0
   []
   # metal
@@ -446,7 +595,7 @@ h_steam = 2.8
     block = 1
   []
   [strain_metal]
-    type = ComputePlaneFiniteStrain
+    type = ComputePlaneIncrementalStrain
     scalar_out_of_plane_strain = scalar_strain_zz
     eigenstrain_names = 'thermal_eigenstrain'
     block = 1
@@ -512,6 +661,10 @@ h_steam = 2.8
     type = PointValue
     variable = 'stress_zz'
     point = '${fparse (a+b)/2} 0 0'
+  []
+  [damage]
+    type = ElementIntegralVariablePostprocessor
+    variable = c
   []
   [years]
     type = FunctionValuePostprocessor
@@ -590,11 +743,11 @@ h_steam = 2.8
 [Executioner]
   type = Transient
   solve_type = PJFNK
-  petsc_options_iname = '-pc_type -pc_factor_mat_solver_package'
-  petsc_options_value = 'lu       superlu_dist                 '
+  petsc_options_iname = '-pc_type -pc_factor_mat_solver_package -snes_type'
+  petsc_options_value = 'lu       superlu_dist                  vinewtonrsls'
   automatic_scaling = true
 
-  l_max_its = 1000
+  l_max_its = 200
   nl_rel_tol = 1e-06
   nl_abs_tol = 1e-06
   nl_forced_its = 1
@@ -615,14 +768,13 @@ h_steam = 2.8
   print_nonlinear_converged_reason = false
   print_linear_residuals = false
   hide = 'scalar_strain_zz'
+  file_base = 'output/elastic_thermal_creep_fracture'
   [exodus]
     type = Exodus
-    file_base = 'output/elastic_thermal_creep'
-    interval = 5
+    interval = 1
   []
   [csv]
     type = CSV
-    file_base = 'output/elastic_thermal_creep'
     execute_postprocessors_on = 'INITIAL TIMESTEP_END'
     execute_vector_postprocessors_on = 'FINAL'
   []
