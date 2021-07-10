@@ -191,7 +191,7 @@ h_steam = 2.8
     heal_always = true
   []
   [subdomain_modifier]
-    type = GeometricCutElementSubdomainModifier
+    type = CutElementSubdomainModifier
     geometric_cut_userobject = cut
     apply_initial_conditions = false
     execute_on = 'INITIAL TIMESTEP_END'
@@ -591,7 +591,7 @@ h_steam = 2.8
   type = Transient
   solve_type = PJFNK
   petsc_options_iname = '-pc_type -pc_factor_mat_solver_package'
-  petsc_options_value = 'lu       superlu_dist                 '
+  petsc_options_value = 'lu       strumpack                    '
   automatic_scaling = true
 
   l_max_its = 1000
@@ -613,7 +613,6 @@ h_steam = 2.8
 [Outputs]
   print_linear_converged_reason = false
   print_nonlinear_converged_reason = false
-  print_linear_residuals = false
   hide = 'scalar_strain_zz'
   [exodus]
     type = Exodus
